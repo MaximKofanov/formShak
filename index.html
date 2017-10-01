@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- jquery можно поключить с файла -->
+</head>
+
+<body>
+
+<form method="post"> 
+
+  <select name="countryCode" id="country" class="country_select" > <!-- Страны  -->
+
+    <option value="ru">Россия</option>
+    <option value="at">Австрия</option>
+    <option value="az">Азербайджан</option>
+    <option value="am">Армения</option>
+    <option value="by">Беларусь</option>
+    <option value="be">Бельгия</option>
+    <option value="bg">Болгария</option>
+    <option value="gb">Великобритания</option>
+    <option value="hu">Венгрия</option>
+    <option value="de">Германия</option>
+    <option value="gr">Греция</option>
+    <option value="ge">Грузия</option>
+    <option value="am">Армения</option>
+    <option value="il">Израиль</option>
+    <option value="es">Испания</option>
+    <option value="it">Италия</option>
+    <option value="kz">Казахстан</option>
+    <option value="cy">Кипр</option>
+    <option value="kg">Киргизия</option>
+    <option value="lv">Латвия</option>
+    <option value="lt">Литва</option>
+    <option value="lu">Люксембург</option>
+    <option value="mk">Македония</option>
+    <option value="md">Молдавия</option>
+    <option value="nl">Нидерланды</option>
+    <option value="no">Норвегия</option>
+    <option value="pl">Польша</option>
+    <option value="pt">Португалия</option>
+    <option value="ro">Румыния</option>
+    <option value="rs">Сербия</option>
+    <option value="sk">Словакия</option>
+    <option value="si">Словения</option>
+    <option value="tr">Турция</option>
+    <option value="uz">Узбекистан</option>
+    <option value="ua">Украина</option>
+    <option value="fr">Франция</option>
+    <option value="hr">Хорватия</option>
+    <option value="cz">Чехия</option>
+    <option value="ch">Швейцария</option>
+    <option value="se">Швеция</option>
+    <option value="ee">Эстония</option>
+
+  </select> <br />
+
+  <input type="text" name="name" placeholder="Ваше Имя:" required><br /> <!-- Имя клиента -->
+
+  <input type="text" name="phone" placeholder="Ваш телефон:" required><br /> <!-- Телефон клиента -->
+
+  <textarea rows="10" cols="45" name="comment" type="hidden" value="notext"></textarea> <!-- Примечание к заказу -->
+
+  <!-- Скрытые -->
+  <input type="hidden" name="number" value="bobx"> <!-- номер потока -->
+  <input type="hidden" name="offerId" value="507"> <!-- id оффера из ссылки -->
+  <input type="hidden" name="ip" value="79.137.150.24"> <!-- ip адрес отправителя -->
+  <input type="hidden" name="landingUrl" value="url"> <!-- Заглушка на url -->
+  <input type="hidden" name="createdAt" value="2017-09-13 15:36:32">  <!-- Дата отправки заявки добавляется автоматически при нажатии кнопки -->
+  <input type="hidden" name="userAgent" value=""> <!-- С чего пользователь отправил заказ -->
+  <input type="hidden" name="sub1" value="sub1">
+  <input type="hidden" name="sub2" value="sub2">
+  <input type="hidden" name="sub3" value="sub3">
+  <input type="hidden" name="sub4" value="sub4">
+
+  <button id="order">Заказать</button>
+
+</form> 
+
+<script type="text/javascript">
+$(function(){
+
+  $('form').addClass('order_form'); 
+
+  $(".order_form").submit(function() { 
+    var date = new Date();
+    var time = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+    $('input[name="createdAt"]').attr('value', time);
+    var th = $(this);
+    $.ajax({
+      type: "POST",
+      url: "success.php",
+      data: th.serialize()
+    }).done(function() {
+      alert("Спасибо!"); // Вызывается для пользователя после отправки заказа, если не нужно - убрать.
+      setTimeout(function() {
+        th.trigger("reset");
+      }, 1000);
+    });
+    return false;
+  });
+
+});  
+
+</script>
+	
+</body>
+</html>

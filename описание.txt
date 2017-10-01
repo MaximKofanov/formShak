@@ -1,0 +1,5 @@
+Для работы нужна библиотека jquery, можно вставить в head <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+Все поля в файле index.html у тега form должны быть
+Атрибут Name меня нельзя
+В value вставить свои параметры если необходимо
+Изначально файл success.php лежит в корне (в папке с index.html), поменять путь если нужно
